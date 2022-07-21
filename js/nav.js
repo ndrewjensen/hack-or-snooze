@@ -3,8 +3,16 @@
 /******************************************************************************
  * Handling navbar clicks and updating navbar
  */
-
 /** Show main list of all stories when click site name */
+
+function navShowNewStoryForm(evt){
+  //create click event
+  console.debug("navShowNewStoryForm",evt);
+  evt.preventDefault()
+  $("#new-story-form").removeClass("hidden")
+}
+//click event for #submit
+$("#submit").on("click", navShowNewStoryForm)
 
 function navAllStories(evt) {
   console.debug("navAllStories", evt);
