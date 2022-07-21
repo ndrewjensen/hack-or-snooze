@@ -55,15 +55,20 @@ function putStoriesOnPage() {
  * on click calls .addStory with form values
  * updates DOM
 */
-function getDataFromForm(event) {
+
+async function getDataFromForm(event) {
   console.debug("getDataFromForm");
   event.preventDefault();
+
   let currentStory = {
     author: $("#author").val(),
     title: $("#title").val(),
     url: $("#url").val()
   };
-  storyList.addStory(currentStory);
+
+  console.log(currentStory);
+  console.log(currentUser)
+  await storyList.addStory(currentUser,currentStory);
   putStoriesOnPage();
 }
 $("#new-story-submit").on("click", getDataFromForm);
