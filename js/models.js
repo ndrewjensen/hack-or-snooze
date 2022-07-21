@@ -76,14 +76,8 @@ class StoryList {
 
   async addStory(currentUser, newStory) {
     console.log(`StoryList.addStory(${currentUser},${newStory})`);
-    // await axios post request
-    //instantiate Story instance
-    //what does adding it to the story list actually entail?
-      //Have we already instantiated a StoryList object?
 
     let currentStory = new Story(newStory);
-    console.log('this is the currentStory',currentStory);
-    console.log('currentUser.loginToken is',currentUser.loginToken)
     let response = await axios({
       url: `${BASE_URL}/stories`,
       method: "POST",
@@ -98,7 +92,7 @@ class StoryList {
     });
     currentStory.storyId = response.data.story.storyId;
     currentStory.createdAt = response.data.story.createdAt;
-    currentStory.username = currentUser;
+    currentStory.username = currentUser.username;
     return currentStory;
   }
 }

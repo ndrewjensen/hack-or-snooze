@@ -66,11 +66,10 @@ async function getDataFromForm(event) {
     url: $("#url").val()
   };
 
-  console.log(currentStory);
-  console.log(currentUser)
-  await storyList.addStory(currentUser,currentStory);
-  putStoriesOnPage();//TODO:shorten this using the return from the await
+  let story = await storyList.addStory(currentUser,currentStory);
+  $allStoriesList.prepend(generateStoryMarkup(story));
 }
+
 $("#new-story-submit").on("click", getDataFromForm);
 
 

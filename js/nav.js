@@ -16,7 +16,7 @@ function navShowNewStoryForm(evt){
   $("#new-story-form").removeClass("hidden")
 }
 //click event for #submit
-$("#submit").on("click", navShowNewStoryForm)
+$("#nav-submit").on("click", navShowNewStoryForm)
 
 function navAllStories(evt) {
   console.debug("navAllStories", evt);
