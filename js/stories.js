@@ -67,9 +67,9 @@ async function getDataFromForm(event) {
   };
 
   const story = await storyList.addStory(currentUser,currentStory);
-  //TODO: change variable name
-  const variable = generateStoryMarkup(story)
-  $allStoriesList.prepend(variable);
+  const currentStoryMarkUp = generateStoryMarkup(story);
+
+  $allStoriesList.prepend(currentStoryMarkUp);
 }
 
 $("#new-story-submit").on("click", getDataFromForm);

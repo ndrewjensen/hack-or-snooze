@@ -214,4 +214,25 @@ class User {
       return null;
     }
   }
+
+  /**take in story object and add to users favorites list */
+  addFavoriteStory (evt) {
+    //get id from the <li>
+    //use id to find the story object in storyList
+    //push storyObject into user's favorite
+  }
+
+
+
+
+  // /** take in story object remove from users' favorites list*/
+
+  // unFavoriteStory (evt) {
+  //   //get id from ancestor <li>
+  //   //remove from current users favorite list
+  //   $(evt.target).closest('li').
+  // }
+
+
+
 }
