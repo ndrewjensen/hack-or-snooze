@@ -50,3 +50,22 @@ function putStoriesOnPage() {
 
   $allStoriesList.show();
 }
+
+/** Takes in new story{author, title, url}
+ * on click calls .addStory with form values
+ * updates DOM
+*/
+function getDataFromForm(event) {
+  console.debug("getDataFromForm");
+  event.preventDefault();
+  let currentStory = {
+    author: $("#author").val(),
+    title: $("#title").val(),
+    url: $("#url").val()
+  };
+  storyList.addStory(currentStory);
+  putStoriesOnPage();
+}
+$("#new-story-submit").on("click", getDataFromForm);
+
+

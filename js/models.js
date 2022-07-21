@@ -80,16 +80,22 @@ class StoryList {
     //what does adding it to the story list actually entail? Have we already instantiated a StoryList object?
 
     let currentStory = new Story(newStory);
-    await axios({
+
+    let response = await axios({
       url: `${BASE_URL}/stories`,
       method: "POST",
-      data: { token: user.loginToken,
+      data: {
+        token: user.loginToken,
         story: {
           author: currentStory.author,
           title: currentStory.title,
           url: currentStory.url
-         }}
-    })
+        }
+      }
+    });
+    currentStory.storyId = response.data.story.storyId;
+    currentStory.createdAt = response.data.story.createdAt;
+    currentStory.username = user;
     return currentStory;
   }
 }
@@ -106,13 +112,13 @@ class User {
    */
 
   constructor({
-                username,
-                name,
-                createdAt,
-                favorites = [],
-                ownStories = []
-              },
-              token) {
+    username,
+    name,
+    createdAt,
+    favorites = [],
+    ownStories = []
+  },
+    token) {
     this.username = username;
     this.name = name;
     this.createdAt = createdAt;

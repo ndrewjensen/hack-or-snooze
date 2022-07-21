@@ -5,6 +5,10 @@
  */
 /** Show main list of all stories when click site name */
 
+
+/** Shows form when submit button is clicked
+ * returns undefined
+*/
 function navShowNewStoryForm(evt){
   //create click event
   console.debug("navShowNewStoryForm",evt);
