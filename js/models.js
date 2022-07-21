@@ -79,8 +79,8 @@ class StoryList {
     //instantiate Story instance
     //what does adding it to the story list actually entail? Have we already instantiated a StoryList object?
 
-    const currentStory = new Story(newStory);
-    currentStory = await axios({
+    let currentStory = new Story(newStory);
+    await axios({
       url: `${BASE_URL}/stories`,
       method: "POST",
       data: { token: user.loginToken,
