@@ -69,7 +69,7 @@ async function getDataFromForm(event) {
   console.log(currentStory);
   console.log(currentUser)
   await storyList.addStory(currentUser,currentStory);
-  putStoriesOnPage();
+  putStoriesOnPage();//TODO:shorten this using the return from the await
 }
 $("#new-story-submit").on("click", getDataFromForm);
 
