@@ -54,6 +54,7 @@ class StoryList {
     //  instance method?
 
     // query the /stories endpoint (no auth required)
+
     const response = await axios({
       url: `${BASE_URL}/stories`,
       method: "GET",
@@ -73,8 +74,23 @@ class StoryList {
    * Returns the new Story instance
    */
 
-  async addStory( /* user, newStory */) {
-    // UNIMPLEMENTED: complete this function!
+  async addStory(user, newStory) {
+    // await axios post request
+    //instantiate Story instance
+    //what does adding it to the story list actually entail? Have we already instantiated a StoryList object?
+
+    const currentStory = new Story(newStory);
+    currentStory = await axios({
+      url: `${BASE_URL}/stories`,
+      method: "POST",
+      data: { token: user.loginToken,
+        story: {
+          author: currentStory.author,
+          title: currentStory.title,
+          url: currentStory.url
+         }}
+    })
+    return currentStory;
   }
 }
 
