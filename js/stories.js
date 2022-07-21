@@ -60,14 +60,16 @@ async function getDataFromForm(event) {
   console.debug("getDataFromForm");
   event.preventDefault();
 
-  let currentStory = {
+  const currentStory = {
     author: $("#author").val(),
     title: $("#title").val(),
     url: $("#url").val()
   };
 
-  let story = await storyList.addStory(currentUser,currentStory);
-  $allStoriesList.prepend(generateStoryMarkup(story));
+  const story = await storyList.addStory(currentUser,currentStory);
+  //TODO: change variable name
+  const variable = generateStoryMarkup(story)
+  $allStoriesList.prepend(variable);
 }
 
 $("#new-story-submit").on("click", getDataFromForm);
