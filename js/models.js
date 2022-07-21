@@ -22,12 +22,10 @@ class Story {
   }
 
   /** Parses hostname out of URL and returns it. */
-  //take URL class and get from there
+
   getHostName() {
-    // UNIMPLEMENTED: complete this function!
-
-
-    return ;
+    const hostName = new URL(this.url).hostname;
+    return hostName;
   }
 }
 
@@ -79,16 +77,15 @@ class StoryList {
   async addStory(currentUser, newStory) {
     console.log(`StoryList.addStory(${currentUser},${newStory})`);
 
-    //TODO: refactor to create newStory
     let response = await axios({
       url: `${BASE_URL}/stories`,
       method: "POST",
       data: {
         token: currentUser.loginToken,
         story: {
-          author: currentStory.author,
-          title: currentStory.title,
-          url: currentStory.url
+          author: newStory.author,
+          title: newStory.title,
+          url: newStory.url
         }
       }
     });
