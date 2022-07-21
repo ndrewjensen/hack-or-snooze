@@ -91,7 +91,10 @@ class StoryList {
     });
     let currentStory = new Story(response.data.story)
 
-    //TODO: add story to this.stories and add to User ownStories
+    this.stories.push(currentStory);
+    currentUser.ownStories.push(currentStory);
+    console.log(this.stories);
+    console.log(currentUser.ownStories);
     return currentStory;
   }
 }
