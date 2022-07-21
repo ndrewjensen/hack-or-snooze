@@ -13,7 +13,7 @@ function navShowNewStoryForm(evt){
   //create click event
   console.debug("navShowNewStoryForm",evt);
   evt.preventDefault()
-  $("#new-story-form").removeClass("hidden")
+  $("#new-story-form").toggle()
 }
 //click event for #submit
 $("#nav-submit").on("click", navShowNewStoryForm)
