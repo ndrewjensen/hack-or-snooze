@@ -84,3 +84,31 @@ async function getDataFromForm(event) {
 $("#new-story-submit").on("click", getDataFromForm);
 
 
+/**toggle the click/target star between filled/unfilled on the DOM */
+
+function toggleStar($star) {
+  $star.attr('class') === 'bi bi-star' ?
+    $star.attr('class', 'bi bi-star-fill') :
+    $star.attr('class', 'bi bi-star');
+}
+
+
+/**Takes in an event (star div)
+ * invokes addFavorite or removeFavorite
+ * invokes toggleStar
+ * returns nothing
+*/
+async function favoriteHandler(evt) {
+  const $star = $(evt.target);
+  let currentStoryId = $star.closest('li').attr("id");
+
+  if ($star.attr('class') === 'bi bi-star') {
+    await currentUser.addFavorite(currentStoryId);
+  } else {
+    await currentUser.removeFavorite(currentStoryId);
+  }
+  toggleStar($star);
+}
+
+$("#all-stories-list").on("click", ".bi", favoriteHandler);
+
