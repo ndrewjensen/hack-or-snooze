@@ -89,7 +89,7 @@ class StoryList {
         }
       }
     });
-    let currentStory = new Story(response.data.story)
+    let currentStory = new Story(response.data.story);
 
     this.stories.push(currentStory);
     currentUser.ownStories.push(currentStory);
@@ -214,25 +214,47 @@ class User {
       return null;
     }
   }
-
+  //DONE!!!!!!
   /**take in story object and add to users favorites list */
-  addFavoriteStory (evt) {
+  addFavorite(currentStoryId) {
     //get id from the <li>
     //use id to find the story object in storyList
     //push storyObject into user's favorite
+    for (let story of storyList.stories) {
+      if (story.storyId === currentStoryId) {
+        currentUser.favorites.push(story);
+      }
+    }
+  }
+
+  //TODO:
+  /** take in story object remove from users' favorites list*/
+  //
+  removeFavorite(currentStoryId) {
+    //get id from ancestor <li>
+    //remove from current users favorite list
+    currentUser.favorites;
   }
 
 
+}
+
+//TODO: update .star to whatever class we give it
+// add colors to stars to see if we need to add or remove
+
+$("#all-stories-list").on("click", ".star", favoriteHandler(evt));
 
 
-  // /** take in story object remove from users' favorites list*/
+//TODO:
+//if gray star(true) -> add story
+//if gold star(false) -> remove story
 
-  // unFavoriteStory (evt) {
-  //   //get id from ancestor <li>
-  //   //remove from current users favorite list
-  //   $(evt.target).closest('li').
-  // }
+function favoriteHandler(evt) {
+  let currentStoryId = $(evt.target).closest('li').attr("id");
 
-
-
+  if (evt.target === grayStar) {
+    addFavorite(currentStoryId);
+  } else {
+    removeFavorite(currentStoryId);
+  }
 }
