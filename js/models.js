@@ -219,16 +219,17 @@ class User {
    * add to currentUsers favorites array
    * return currentUsers favorites */
 
-  addFavorite(currentStoryId) {
-    //get id from the <li>
-    //use id to find the story object in storyList
-    //push storyObject into user's favorite
-    for (let story of storyList.stories) {
-      if (story.storyId === currentStoryId) {
-        currentUser.favorites.push(story);
-        return currentUser.favorites;
-      }
-    }
+  async addFavorite(currentStoryId) {
+    const response = await axios({
+      url:
+        `${BASE_URL}/users/${currentUser.username}/favorites/${currentStoryId}`,
+      method: "POST",
+      data: {
+        token: currentUser.loginToken
+      },
+    });
+    currentUser.favorites = response.data.user.favorites;
+    return currentUser.favorites;
   }
 
   /** take in currentStoryId,
@@ -236,45 +237,18 @@ class User {
    * return favorites array
   */
 
-  removeFavorite(currentStoryId) {
+  async removeFavorite(currentStoryId) {
     //get id from ancestor <li>
     //remove from current users favorite list
-    currentUser.favorites;
-    for (let i=0; i < currentUser.favorites.length; i++) {
-      if (currentUser.favorites[i].storyId === currentStoryId) {
-        currentUser.favorites.splice(i,1)
-        return currentUser.favorites
-      }
-    }
+    const response = await axios({
+      url:
+        `${BASE_URL}/users/${currentUser.username}/favorites/${currentStoryId}`,
+      method: "DELETE",
+      data: {
+        token: currentUser.loginToken
+      },
+    });
+    currentUser.favorites = response.data.user.favorites;
+    return currentUser.favorites;
   }
 }
-
-//TODO: update .star to whatever class we give it
-// add colors to stars to see if we need to add or remove
-
-/**toggle the click/target star between filled/unfilled on the DOM */
-
-function toggleStar($star) {
-  $star.attr('class') === 'bi bi-star' ?
-    $star.attr('class','bi bi-star-fill') :
-    $star.attr('class','bi bi-star') ;
-}
-
-
-
-//TODO:
-//refactor if else when we know some actual ways to determine gray or gold
-
-function favoriteHandler(evt) {
-  const $star = $(evt.target);
-  let currentStoryId = $star.closest('li').attr("id");
-  console.log($star.attr('class'));
-  if ($star.attr('class') === 'bi bi-star') {
-    currentUser.addFavorite(currentStoryId);
-  } else {
-    currentUser.removeFavorite(currentStoryId);
-  }
-  toggleStar($star);
-}
-
-$("#all-stories-list").on("click", ".bi", favoriteHandler);
