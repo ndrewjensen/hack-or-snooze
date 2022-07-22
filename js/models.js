@@ -235,7 +235,7 @@ class User {
    * remove story object from users' favorites array,
    * return favorites array
   */
-  
+
   removeFavorite(currentStoryId) {
     //get id from ancestor <li>
     //remove from current users favorite list
@@ -252,21 +252,29 @@ class User {
 //TODO: update .star to whatever class we give it
 // add colors to stars to see if we need to add or remove
 
+/**toggle the click/target star between filled/unfilled on the DOM */
+
+function toggleStar($star) {
+  $star.attr('class') === 'bi bi-star' ?
+    $star.attr('class','bi bi-star-fill') :
+    $star.attr('class','bi bi-star') ;
+}
 
 
 
 //TODO:
-//if gray star(true) -> add story
-//if gold star(false) -> remove story
+//refactor if else when we know some actual ways to determine gray or gold
 
 function favoriteHandler(evt) {
-  let currentStoryId = $(evt.target).closest('li').attr("id");
-
-  if (evt.target === grayStar) {
-    addFavorite(currentStoryId);
+  const $star = $(evt.target);
+  let currentStoryId = $star.closest('li').attr("id");
+  console.log($star.attr('class'));
+  if ($star.attr('class') === 'bi bi-star') {
+    currentUser.addFavorite(currentStoryId);
   } else {
-    removeFavorite(currentStoryId);
+    currentUser.removeFavorite(currentStoryId);
   }
+  toggleStar($star);
 }
 
-//$("#all-stories-list").on("click", ".star", favoriteHandler(evt));
+$("#all-stories-list").on("click", ".bi", favoriteHandler);
