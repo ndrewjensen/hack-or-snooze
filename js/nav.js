@@ -9,14 +9,14 @@
 /** Shows form when submit button is clicked
  * returns undefined
 */
-function navShowNewStoryForm(evt){
+function navShowNewStoryForm(evt) {
   //create click event
-  console.debug("navShowNewStoryForm",evt);
-  evt.preventDefault()
-  $("#new-story-form").toggle()
+  console.debug("navShowNewStoryForm", evt);
+  evt.preventDefault();
+  $("#new-story-form").toggle();
 }
 //click event for #submit
-$("#nav-submit").on("click", navShowNewStoryForm)
+$("#nav-submit").on("click", navShowNewStoryForm);
 
 function navAllStories(evt) {
   console.debug("navAllStories", evt);

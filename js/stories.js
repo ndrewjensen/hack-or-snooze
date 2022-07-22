@@ -90,6 +90,7 @@ function toggleStar($star) {
 }
 
 /**Takes in an event (star div)
+ * calls API
  * invokes addFavorite or removeFavorite
  * invokes toggleStar
  * returns nothing
@@ -98,19 +99,14 @@ async function favoriteHandler(evt) {
   console.debug("favoriteHandler");
   const $star = $(evt.target);
   let currentStoryId = $star.closest("li").attr("id");
-  let currentStory = null;
-  for (let story of storyList.stories) {
-    if (story.storyId === currentStoryId) {
-      currentStory = story;
-      break;
-    }
+
+  const story = await Story.getStoryById(currentStoryId);
+  if ($star.attr("class") === "bi bi-star") {
+    await currentUser.addFavorite(story);
+  } else {
+    await currentUser.removeFavorite(story.storyId);
   }
 
-  if ($star.attr("class") === "bi bi-star") {
-    await currentUser.addFavorite(currentStory);
-  } else {
-    await currentUser.removeFavorite(currentStoryId);
-  }
   toggleStar($star);
 }
 

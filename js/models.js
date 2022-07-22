@@ -27,6 +27,14 @@ class Story {
     const hostName = new URL(this.url).hostname;
     return hostName;
   }
+
+  //TODO:
+  /** takes in a storyId and returns something... */
+  static async getStoryById(currentStoryId) {
+    console.debug("getStoryById");
+    const response = await axios.get(`${BASE_URL}/stories/${currentStoryId}`);
+    return new Story(response.data.story);
+  }
 }
 
 
@@ -93,8 +101,6 @@ class StoryList {
 
     this.stories.push(currentStory);
     currentUser.ownStories.push(currentStory);
-    console.log(this.stories);
-    console.log(currentUser.ownStories);
     return currentStory;
   }
 }
@@ -221,7 +227,7 @@ class User {
 
   async addFavorite(currentStory) {
     console.debug('addfavorite');
-    const response = await axios({
+    await axios({
       url:
         `${BASE_URL}/users/${this.username}/favorites/${currentStory.storyId}`,
       method: "POST",
@@ -229,7 +235,6 @@ class User {
         token: this.loginToken
       },
     });
-    console.log(response.data);
     this.favorites.push(currentStory);
     return this.favorites;
   }
@@ -241,7 +246,7 @@ class User {
 
   async removeFavorite(currentStoryId) {
     console.debug('removeFavorite');
-    const response = await axios({
+    await axios({
       url:
         `${BASE_URL}/users/${this.username}/favorites/${currentStoryId}`,
       method: "DELETE",
@@ -250,9 +255,9 @@ class User {
       },
     });
 
-    for (let i = 0; i< this.favorites.length; i++ ) {
+    for (let i = 0; i < this.favorites.length; i++) {
       if (this.favorites[i].storyId === currentStoryId) {
-        this.favorites.splice(i,1);
+        this.favorites.splice(i, 1);
         break;
       }
     }
