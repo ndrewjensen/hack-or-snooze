@@ -223,14 +223,14 @@ class User {
     console.debug('addfavorite');
     const response = await axios({
       url:
-        `${BASE_URL}/users/${currentUser.username}/favorites/${currentStoryId}`,
+        `${BASE_URL}/users/${this.username}/favorites/${currentStoryId}`,
       method: "POST",
       data: {
-        token: currentUser.loginToken
+        token: this.loginToken
       },
     });
-    currentUser.favorites = response.data.user.favorites;
-    return currentUser.favorites;
+    this.favorites = response.data.user.favorites;
+    return this.favorites;
   }
 
   /** take in currentStoryId,
@@ -242,13 +242,13 @@ class User {
     console.debug('removeFavorite');
     const response = await axios({
       url:
-        `${BASE_URL}/users/${currentUser.username}/favorites/${currentStoryId}`,
+        `${BASE_URL}/users/${this.username}/favorites/${currentStoryId}`,
       method: "DELETE",
       data: {
-        token: currentUser.loginToken
+        token: this.loginToken
       },
     });
-    currentUser.favorites = response.data.user.favorites;
-    return currentUser.favorites;
+    this.favorites = response.data.user.favorites;
+    return this.favorites;
   }
 }

@@ -49,4 +49,6 @@ function updateNavOnLogin() {
   $navUserProfile.text(`${currentUser.username}`).show();
 }
 
-//$('#favorites').on("click", putStoriesOnPage);
+//TODO:why did we need to use an arrow function to call putStoriesOnPage
+$('#favorites').on("click", (evt) => putStoriesOnPage(evt));
+$('#my-stories').on("click", (evt) => putStoriesOnPage(evt));
