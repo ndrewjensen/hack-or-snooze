@@ -220,6 +220,7 @@ class User {
    * return currentUsers favorites */
 
   async addFavorite(currentStoryId) {
+    console.debug('addfavorite');
     const response = await axios({
       url:
         `${BASE_URL}/users/${currentUser.username}/favorites/${currentStoryId}`,
@@ -238,8 +239,7 @@ class User {
   */
 
   async removeFavorite(currentStoryId) {
-    //get id from ancestor <li>
-    //remove from current users favorite list
+    console.debug('removeFavorite');
     const response = await axios({
       url:
         `${BASE_URL}/users/${currentUser.username}/favorites/${currentStoryId}`,

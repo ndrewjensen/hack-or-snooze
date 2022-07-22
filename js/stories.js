@@ -87,6 +87,7 @@ $("#new-story-submit").on("click", getDataFromForm);
 /**toggle the click/target star between filled/unfilled on the DOM */
 
 function toggleStar($star) {
+  console.debug('toggleStar')
   $star.attr('class') === 'bi bi-star' ?
     $star.attr('class', 'bi bi-star-fill') :
     $star.attr('class', 'bi bi-star');
@@ -99,6 +100,7 @@ function toggleStar($star) {
  * returns nothing
 */
 async function favoriteHandler(evt) {
+  console.debug('favoriteHandler')
   const $star = $(evt.target);
   let currentStoryId = $star.closest('li').attr("id");
 
@@ -111,4 +113,6 @@ async function favoriteHandler(evt) {
 }
 
 $("#all-stories-list").on("click", ".bi", favoriteHandler);
+
+
 

@@ -48,3 +48,5 @@ function updateNavOnLogin() {
   $navLogOut.show();
   $navUserProfile.text(`${currentUser.username}`).show();
 }
+
+//$('#favorites').on("click", putStoriesOnPage);
