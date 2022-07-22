@@ -214,8 +214,11 @@ class User {
       return null;
     }
   }
-  //DONE!!!!!!
-  /**take in story object and add to users favorites list */
+
+  /**take in currentStoryID
+   * add to currentUsers favorites array
+   * return currentUsers favorites */
+
   addFavorite(currentStoryId) {
     //get id from the <li>
     //use id to find the story object in storyList
@@ -223,26 +226,33 @@ class User {
     for (let story of storyList.stories) {
       if (story.storyId === currentStoryId) {
         currentUser.favorites.push(story);
+        return currentUser.favorites;
       }
     }
   }
 
-  //TODO:
-  /** take in story object remove from users' favorites list*/
-  //
+  /** take in currentStoryId,
+   * remove story object from users' favorites array,
+   * return favorites array
+  */
+  
   removeFavorite(currentStoryId) {
     //get id from ancestor <li>
     //remove from current users favorite list
     currentUser.favorites;
+    for (let i=0; i < currentUser.favorites.length; i++) {
+      if (currentUser.favorites[i].storyId === currentStoryId) {
+        currentUser.favorites.splice(i,1)
+        return currentUser.favorites
+      }
+    }
   }
-
-
 }
 
 //TODO: update .star to whatever class we give it
 // add colors to stars to see if we need to add or remove
 
-$("#all-stories-list").on("click", ".star", favoriteHandler(evt));
+
 
 
 //TODO:
@@ -258,3 +268,5 @@ function favoriteHandler(evt) {
     removeFavorite(currentStoryId);
   }
 }
+
+//$("#all-stories-list").on("click", ".star", favoriteHandler(evt));
