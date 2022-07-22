@@ -49,6 +49,24 @@ function updateNavOnLogin() {
   $navUserProfile.text(`${currentUser.username}`).show();
 }
 
+/**takes in click and determines which list of stories to display,
+ * either currentUser's favorites or ownStories
+ * invokes putStoriesOnPage, passing in list
+ */
+
+function switchDisplayedList(evt) {
+  console.debug('switchDisplayedList');
+  let currentList = null;
+  if ($(evt.target).attr("id") === "favorites") {
+    //console.log("favorite list being selected");
+    currentList = currentUser.favorites;
+  } else if ($(evt.target).attr("id") === "my-stories") {
+    //console.log("my stories list being selected");
+    currentList = currentUser.ownStories;
+  }
+  putStoriesOnPage(currentList);
+}
+
 //TODO:why did we need to use an arrow function to call putStoriesOnPage
-$('#favorites').on("click", (evt) => putStoriesOnPage(evt));
-$('#my-stories').on("click", (evt) => putStoriesOnPage(evt));
+$('#favorites').on("click", (evt) => switchDisplayedList(evt));
+$('#my-stories').on("click", (evt) => switchDisplayedList(evt));

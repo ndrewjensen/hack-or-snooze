@@ -219,17 +219,18 @@ class User {
    * add to currentUsers favorites array
    * return currentUsers favorites */
 
-  async addFavorite(currentStoryId) {
+  async addFavorite(currentStory) {
     console.debug('addfavorite');
     const response = await axios({
       url:
-        `${BASE_URL}/users/${this.username}/favorites/${currentStoryId}`,
+        `${BASE_URL}/users/${this.username}/favorites/${currentStory.storyId}`,
       method: "POST",
       data: {
         token: this.loginToken
       },
     });
-    this.favorites = response.data.user.favorites;
+    console.log(response.data);
+    this.favorites.push(currentStory);
     return this.favorites;
   }
 
@@ -248,7 +249,13 @@ class User {
         token: this.loginToken
       },
     });
-    this.favorites = response.data.user.favorites;
+
+    for (let i = 0; i< this.favorites.length; i++ ) {
+      if (this.favorites[i].storyId === currentStoryId) {
+        this.favorites.splice(i,1);
+        break;
+      }
+    }
     return this.favorites;
   }
 }

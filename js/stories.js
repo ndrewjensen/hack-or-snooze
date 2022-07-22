@@ -44,30 +44,16 @@ function generateStoryMarkup(story) {
 
 /** Gets list of stories from server, generates their HTML, and puts on page. */
 
-function putStoriesOnPage(evt) {
+function putStoriesOnPage(currentList = storyList.stories) {
   console.debug("putStoriesOnPage");
 
   $allStoriesList.empty();
-
-  //determine which story list to loop: favorites, ownStories or storyList
-  let currentList = storyList.stories;
-  if (!evt) {
-    console.log("not event");
-    currentList = storyList.stories;
-  } else if ($(evt.target).attr("id") === "favorites") {
-    console.log("favorite list being selected");
-    currentList = currentUser.favorites;
-  } else if ($(evt.target).attr("id") === "my-stories") {
-    console.log("my stories list being selected");
-    currentList = currentUser.ownStories;
-  }
 
   // loop through all of our stories and generate HTML for them
   for (let story of currentList) {
     const $story = generateStoryMarkup(story);
     $allStoriesList.append($story);
   }
-
   $allStoriesList.show();
 }
 
@@ -112,9 +98,16 @@ async function favoriteHandler(evt) {
   console.debug("favoriteHandler");
   const $star = $(evt.target);
   let currentStoryId = $star.closest("li").attr("id");
+  let currentStory = null;
+  for (let story of storyList.stories) {
+    if (story.storyId === currentStoryId) {
+      currentStory = story;
+      break;
+    }
+  }
 
   if ($star.attr("class") === "bi bi-star") {
-    await currentUser.addFavorite(currentStoryId);
+    await currentUser.addFavorite(currentStory);
   } else {
     await currentUser.removeFavorite(currentStoryId);
   }
