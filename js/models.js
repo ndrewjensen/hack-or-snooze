@@ -28,8 +28,7 @@ class Story {
     return hostName;
   }
 
-  //TODO:
-  /** takes in a storyId and returns something... */
+  /** takes in a storyId and returns story object... */
   static async getStoryById(currentStoryId) {
     console.debug("getStoryById");
     const response = await axios.get(`${BASE_URL}/stories/${currentStoryId}`);
@@ -221,7 +220,7 @@ class User {
     }
   }
 
-  /**take in currentStoryID
+  /**take in currentStory object
    * add to currentUsers favorites array
    * return currentUsers favorites */
 
@@ -255,6 +254,7 @@ class User {
       },
     });
 
+    //this should be a filter
     for (let i = 0; i < this.favorites.length; i++) {
       if (this.favorites[i].storyId === currentStoryId) {
         this.favorites.splice(i, 1);

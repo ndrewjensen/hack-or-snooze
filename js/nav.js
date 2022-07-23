@@ -67,6 +67,5 @@ function switchDisplayedList(evt) {
   putStoriesOnPage(currentList);
 }
 
-//TODO:why did we need to use an arrow function to call putStoriesOnPage
-$('#favorites').on("click", (evt) => switchDisplayedList(evt));
-$('#my-stories').on("click", (evt) => switchDisplayedList(evt));
+$('#favorites').on("click", switchDisplayedList);
+$('#my-stories').on("click", switchDisplayedList);

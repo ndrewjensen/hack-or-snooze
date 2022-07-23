@@ -42,7 +42,9 @@ function generateStoryMarkup(story) {
     `);
 }
 
-/** Gets list of stories from server, generates their HTML, and puts on page. */
+/** pass in list of stories
+ * generates their HTML,
+ * and puts on page. */
 
 function putStoriesOnPage(currentList = storyList.stories) {
   console.debug("putStoriesOnPage");
@@ -80,10 +82,13 @@ async function getDataFromForm(event) {
 
 $("#new-story-submit").on("click", getDataFromForm);
 
-/**toggle the click/target star between filled/unfilled on the DOM */
+/**toggle the click/target star between filled/unfilled on the DOM
+ * returns undefined
+ */
 
 function toggleStar($star) {
   console.debug("toggleStar");
+  //$star.toggleClass("bi-star", "bi-star-fill"); //should be able to toggle multiple classes at once
   $star.attr("class") === "bi bi-star"
     ? $star.attr("class", "bi bi-star-fill")
     : $star.attr("class", "bi bi-star");
@@ -93,7 +98,7 @@ function toggleStar($star) {
  * calls API
  * invokes addFavorite or removeFavorite
  * invokes toggleStar
- * returns nothing
+ * returns undefined
  */
 async function favoriteHandler(evt) {
   console.debug("favoriteHandler");
