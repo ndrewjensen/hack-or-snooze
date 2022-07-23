@@ -88,10 +88,11 @@ $("#new-story-submit").on("click", getDataFromForm);
 
 function toggleStar($star) {
   console.debug("toggleStar");
-  //$star.toggleClass("bi-star", "bi-star-fill"); //should be able to toggle multiple classes at once
-  $star.attr("class") === "bi bi-star"
-    ? $star.attr("class", "bi bi-star-fill")
-    : $star.attr("class", "bi bi-star");
+  $star.toggleClass("bi-star bi-star-fill"); //should be able to toggle multiple classes at once
+  //Margaret - the line above replaces these following three lines
+  // $star.attr("class") === "bi bi-star"
+  //   ? $star.attr("class", "bi bi-star-fill")
+  //   : $star.attr("class", "bi bi-star");
 }
 
 /**Takes in an event (star div)

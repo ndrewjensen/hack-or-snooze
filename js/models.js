@@ -24,8 +24,7 @@ class Story {
   /** Parses hostname out of URL and returns it. */
 
   getHostName() {
-    const hostName = new URL(this.url).hostname;
-    return hostName;
+    return new URL(this.url).hostname;
   }
 
   /** takes in a storyId and returns story object... */
